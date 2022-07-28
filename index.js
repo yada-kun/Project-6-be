@@ -1,7 +1,12 @@
+const dotenv = require('dotenv');
 const express = require('express');
 const app  = express();
 const port = 8000;
 const cors = require('cors')
+dotenv.config();
+
+const mongodb = process.env.MONGO_DB;
+
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -9,7 +14,10 @@ app.use(bodyParser.json());
 
 // Connection to the MongoDB Database
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/project6');
+// mongoose.connect('mongodb://localhost:27017/project6');
+mongoose.connect(mongodb).then((response) => {
+    console.log(response);
+})
 app.use(cors())
 
 
